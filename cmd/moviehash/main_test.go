@@ -2,7 +2,9 @@ package main
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
+	"os"
 	"testing"
 
 	"github.com/opensubtitlescli/moviehash/testdata"
@@ -37,6 +39,13 @@ func TestPrintsHelpMessageIfArgumentsAreInvalid(t *testing.T) {
 func TestPrintsTheMoviehashOfTheFile(t *testing.T) {
 	m, err := testdata.FilesMap()
 	require.NoError(t, err)
+
+	_, err = os.Stat(m[0][0])
+	if err != nil && errors.Is(err, os.ErrNotExist) {
+		fmt.Printf("warn: %s not found\n", m[0][0])
+		return
+	}
+
 	out, code := run(m[0][0])
 	assert.Equal(t, 0, code)
 	assert.Equal(t, m[0][1] + "\n", out)
@@ -45,6 +54,19 @@ func TestPrintsTheMoviehashOfTheFile(t *testing.T) {
 func TestPrintsTheMoviehashOfFiles(t *testing.T) {
 	m, err := testdata.FilesMap()
 	require.NoError(t, err)
+
+	_, err = os.Stat(m[0][0])
+	if err != nil && errors.Is(err, os.ErrNotExist) {
+		fmt.Printf("warn: %s not found\n", m[0][0])
+		return
+	}
+
+	_, err = os.Stat(m[1][0])
+	if err != nil && errors.Is(err, os.ErrNotExist) {
+		fmt.Printf("warn: %s not found\n", m[1][0])
+		return
+	}
+
 	out, code := run(m[0][0], m[1][0])
 	assert.Equal(t, 0, code)
 	assert.Equal(t, m[0][1] + "\n" + m[1][1] + "\n", out)
