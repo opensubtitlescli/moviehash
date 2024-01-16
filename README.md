@@ -1,5 +1,7 @@
 # Moviehash
 
+[![audit](https://github.com/opensubtitlescli/moviehash/actions/workflows/audit.yml/badge.svg)](https://github.com/opensubtitlescli/moviehash/actions/workflows/audit.yml)
+
 A package of one hash function to match subtitle files against movie files. You can read more about algorithm on the [OpenSubtitles API](https://opensubtitles.stoplight.io/docs/opensubtitles-api/e3750fd63a100-getting-started#calculating-moviehash-of-video-file).
 
 ```go
