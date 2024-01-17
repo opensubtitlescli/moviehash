@@ -8,15 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Setup Golang
       uses: actions/setup-go@v4
       with:
         go-version: "1.21.5"
-
-    - name: Download Modules
-      run: make download
 
     - name: Lint the Source Code
       uses: golangci/golangci-lint-action@v3
