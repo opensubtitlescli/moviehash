@@ -1,0 +1,28 @@
+version: 1
+
+project_name: moviehash
+dist: bin
+
+release:
+  draft: true
+
+builds:
+- binary: moviehash
+  env:
+  - CGO_ENABLED=0
+  dir: cmd/moviehash
+
+archives:
+- format: tar.gz
+  name_template: >-
+    {{ .ProjectName }}-
+    {{- .Tag }}-
+    {{- if eq .Os "darwin" }}macOS
+    {{- else }}{{ title .Os }}{{ end }}-
+    {{- .Arch }}
+  format_overrides:
+  - goos: windows
+    format: zip
+  files:
+  - LICENSE
+  - README.md

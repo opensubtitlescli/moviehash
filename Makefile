@@ -2,30 +2,11 @@
 
 .PHONY: all
 all: # Run all recipes.
-all: download lint test bin artifact
+all: lint test build
 
-.PHONY: artifact
-artifact: # Create an artifact.
-	@tar \
-		--create \
-		--use-compress-program zstd \
-		--directory .build \
-		--file moviehash.tar.zst \
-		moviehash
-
-.PHONY: bin
-bin: # Build a binary.
-	@go build -o ./.build/moviehash ./cmd/moviehash/main.go
-
-.PHONY: download
-download: # Download modules.
-	@go mod download
-
-.PHONY: draft
-draft: # Create a draft release.
-	@v=$(shell ./.build/moviehash -v | tr -d "\n") && \
-		gh release create "$$v" --draft --generate-notes && \
-		gh release upload "$$v" moviehash.tar.zst
+.PHONY: build
+build: # Build a binary.
+	@goreleaser --clean --skip publish --snapshot
 
 .PHONY: help
 help: # Show help information.
