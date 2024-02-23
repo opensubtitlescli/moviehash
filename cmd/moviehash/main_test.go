@@ -21,7 +21,7 @@ func TestPrintsHelpMessage(t *testing.T) {
 func TestPrintsMoviehashVersion(t *testing.T) {
 	out, code := run("-v")
 	assert.Equal(t, 0, code)
-	assert.Equal(t, "0.0.1\n", out)
+	assert.Equal(t, "0.1.0\n", out)
 }
 
 func TestPrintsHelpMessageIfThereAreNoArguments(t *testing.T) {
