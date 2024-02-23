@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	Version = "0.0.1"
+	Version = "0.1.0"
 
 	chunkSize     =      65536 // byte
 	fileMaxSize   = 9000000000 // byte
