@@ -11,12 +11,12 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Setup Golang
-      uses: actions/setup-go@v4
+      uses: actions/setup-go@v5
       with:
         go-version: "1.21.5"
 
     - name: Lint the Source Code
-      uses: golangci/golangci-lint-action@v3
+      uses: golangci/golangci-lint-action@v4
       with:
         version: "v1.55.2"
 
